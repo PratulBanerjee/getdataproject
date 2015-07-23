@@ -18,20 +18,21 @@ features <-
 wanted_features <- features %>% filter(func %in% c("mean", "std"))
 
 load.dataset <- function(set) {
+  subjects <- read.table(
+    paste("UCI HAR Dataset/", set, "/subject_", set, ".txt", sep = ""), col.names =
+      "subject"
+  )
+  
+  loaded_activities <-
+    read.table(paste("UCI HAR Dataset/", set, "/y_", set, ".txt", sep = ""), col.names =
+                 "activity_id") %>% left_join(activities, by = "activity_id")
+  
   measurements <-
     read.table(paste("UCI HAR Dataset/", set, "/X_", set, ".txt", sep = ""), col.names = features$label) %>% 
     select(wanted_features$feature_id)
   
-  loaded_activities <-
-    read.table(paste("UCI HAR Dataset/", set, "/y_", set, ".txt", sep = ""), col.names =
-                 "activity_id") %>%
-    merge(activities)
-  
   dataset <-
-    data.frame(read.table(
-      paste("UCI HAR Dataset/", set, "/subject_", set, ".txt", sep = ""), col.names =
-        "subject"
-    ), loaded_activities)#, measurements)
+    tbl_df(data.frame(subjects, loaded_activities, measurements))
   
   dataset
 }
