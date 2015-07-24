@@ -24,7 +24,7 @@ dt <- load.datasets()
 write.table(dt, "out.txt", row.names = FALSE)
 ```
 
-# Explanation
+# Explanation of analysis
 
 ## Activity Labels
 
