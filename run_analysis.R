@@ -112,8 +112,3 @@ load.dataset <- function(set) {
 load.datasets <- function() {
   bind_rows(load.dataset("train"), load.dataset("test"))
 }
-
-# expect
-# mean(dataset$tBodyAcc.mean...X[dataset$subject==1 & dataset$activity_id ==6])
-# mean(dataset$tBodyAcc.mean...X[dataset$subject==1 & dataset$activity == "LAYING"])
-# 0.2215982
