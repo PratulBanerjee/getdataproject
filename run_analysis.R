@@ -16,8 +16,7 @@ features <-
 
 # These are the features we want to report on
 wanted_features <- features %>%
-  filter(func %in% c("mean", "std")) %>%
-  mutate(colname = gsub("(-|\\(|\\))", ".", label))
+  filter(func %in% c("mean", "std")) 
 
 load.dataset <- function(set) {
   subjects <-
